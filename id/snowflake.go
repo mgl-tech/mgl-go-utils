@@ -1,4 +1,4 @@
-package mgl
+package id
 
 import (
 	"encoding/base64"
