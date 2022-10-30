@@ -11,6 +11,7 @@ type envUtils struct {
 var EnvUtils = envUtils{}
 
 func (receiver envUtils) GetIpDataPath() (dbPath string) {
+
 	dir, _ := os.Getwd()
 	println("dir", dir)
 	fmt.Println("dir != \"/\"", dir != "/")
