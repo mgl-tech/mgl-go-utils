@@ -33,30 +33,25 @@ func TestGenerator(t *testing.T) {
 
 	g := New(o)
 	g.Open()
-	g.Add(URL{Loc: "test1", Priority: "1.0", LastMod: "12121", ChangeFreq: ChangeFreqDaily})
+	g.Add(Url{Loc: o.BaseURL, Priority: "1.0", LastMod: "12121", ChangeFreq: ChangeFreqDaily, Language: "zh,en,ko,ja"})
 	g.Close()
-	/*	require.NoError(t, g.Open())
-		require.NoError(t, g.Add(URL{Loc: "test1", Priority: "1.0", LastMod: "12121", ChangeFreq: ChangeFreqDaily}))
-		require.NoError(t, g.Add(URL{Loc: "test2"}))
-		require.NoError(t, g.Close())*/
 
-	//o.Filename = "b"
-	/*g = New(o)
-	require.NoError(t, g.Open())
-	require.NoError(t, g.Add(URL{Loc: "test1"}))
-	require.NoError(t, g.Add(URL{Loc: "test2"}))
-	require.NoError(t, g.Add(URL{Loc: "test3"}))
-	require.NoError(t, g.Add(URL{Loc: "test4"}))
-	require.NoError(t, g.Add(URL{Loc: "test5"}))
-	require.NoError(t, g.Close())
+	o.Filename = "b"
+	g = New(o)
+	g.Open()
+	g.Add(Url{Loc: "test1"})
+	g.Add(Url{Loc: "test2"})
+	g.Add(Url{Loc: "test3"})
+	g.Add(Url{Loc: "test4"})
+	g.Add(Url{Loc: "test5"})
+	g.Close()
 
-	files, _ := ioutil.ReadDir(g.opt.Dir)
-	require.Equal(t, 5, len(files))
-	require.Equal(t, "a.xml", files[0].Name())
-	require.Equal(t, "b-1.xml", files[1].Name())
-	require.Equal(t, "b-2.xml", files[2].Name())
-	require.Equal(t, "b-3.xml", files[3].Name())
-	require.Equal(t, "b.xml", files[4].Name())*/
+	/*	files, _ := os.ReadDir(g.opt.Dir)
+		files[0].Name()
+		files[1].Name()
+		files[2].Name()
+		files[3].Name()
+		files[4].Name()*/
 }
 
 func TestParamChecks(t *testing.T) {
@@ -82,7 +77,7 @@ func TestParamChecks(t *testing.T) {
 		opt.MaxURLs = 2
 		g = New(opt)
 		err = g.Open()
-		require.NoError(t, err)*/
+		 err)*/
 }
 
 func TestInternals(t *testing.T) {
@@ -98,13 +93,13 @@ func TestInternals(t *testing.T) {
 		}
 		g = New(opt)
 		err = g.Open()
-		require.NoError(t, err)
+		 err)
 		require.True(t, g.canFit(10))
 		require.False(t, g.canFit(11))
 
 		n1 := g.formatURLNode(URL{Loc: "test1"})
-		require.Equal(t, `<url><loc>test1</loc></url>`, n1)
+		Url `<url><loc>test1</loc></url>`, n1)
 
 		n2 := g.formatURLNode(URL{Loc: "test2", ChangeFreq: ChangeFreqDaily})
-		require.Equal(t, `<url><loc>test2</loc><changefreq>daily</changefreq></url>`, n2)*/
+		Url `<url><loc>test2</loc><changefreq>daily</changefreq></url>`, n2)*/
 }

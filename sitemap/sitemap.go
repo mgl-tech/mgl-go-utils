@@ -10,32 +10,34 @@ const (
 	ChangeFreqNever   = "never"
 )
 
-type Url interface {
+/*type Url interface {
 	SitemapLoc() string
 	SitemapChangeFreq() string
 	SitemapLastMod() string
 	SitemapPriority() string
-}
+}*/
 
-type URL struct {
+type Url struct {
 	Loc        string
 	ChangeFreq string
 	LastMod    string
 	Priority   string
+	Language   string
 }
 
-func (u URL) SitemapLoc() string {
+/*func (u url) SitemapLoc() string {
 	return u.Loc
 }
 
-func (u URL) SitemapChangeFreq() string {
+func (u url) SitemapChangeFreq() string {
 	return u.ChangeFreq
 }
 
-func (u URL) SitemapLastMod() string {
+func (u url) SitemapLastMod() string {
 	return u.LastMod
 }
 
-func (u URL) SitemapPriority() string {
+func (u url) SitemapPriority() string {
 	return u.Priority
 }
+*/

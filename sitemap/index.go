@@ -5,12 +5,13 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 )
 
 const (
-	header      = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9/">`
+	header      = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`
 	footer      = `</urlset>`
-	indexHeader = `<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="https://www.sitemaps.org/schemas/sitemap/0.9/">`
+	indexHeader = `<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`
 	indexFooter = `</sitemapindex>`
 	tmpExt      = `.xml.tmp`
 	ext         = `.xml`
@@ -141,14 +142,21 @@ func (g *Generator) canFit(nodeLen int) bool {
 
 // formatURLNode creates xml for url node
 func (g *Generator) formatURLNode(u Url) string {
-	r := `<url><loc>` + u.SitemapLoc() + `</loc>`
-	if t := u.SitemapLastMod(); t != "" {
+	r := `<url><loc>` + u.Loc + `</loc>`
+	if t := u.Language; t != "" && len(t) > 0 {
+		langs := strings.Split(u.Language, ",")
+		for i := 0; i < len(langs); i++ {
+			lang := langs[i]
+			r += `<xhtml:link rel="alternate" hreflang="` + lang + `" href="` + u.Loc + `"/>`
+		}
+	}
+	if t := u.LastMod; t != "" {
 		r += `<lastmod>` + t + `</lastmod>`
 	}
-	if t := u.SitemapChangeFreq(); t != "" {
+	if t := u.ChangeFreq; t != "" {
 		r += `<changefreq>` + t + `</changefreq>`
 	}
-	if t := u.SitemapPriority(); t != "" {
+	if t := u.Priority; t != "" {
 		r += `<priority>` + t + `</priority>`
 	}
 	return r + `</url>`
