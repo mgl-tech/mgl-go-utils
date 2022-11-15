@@ -19,7 +19,7 @@ func Test() {
 
 	g.Open()
 
-	g.Add(sitemap.URL{
+	g.Add(sitemap.Url{
 		Loc: "ddddd",
 	})
 
